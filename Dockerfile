@@ -14,6 +14,7 @@ RUN \
     apt-get update && \
     echo "*** installing runtime applications ***" && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y git rtorrent unzip unrar mediainfo curl php-fpm php-cli php-geoip php-mbstring php-zip nginx wget ffmpeg supervisor php-xml libarchive-zip-perl libjson-perl libxml-libxml-perl irssi sox python3-pip && \
+    pip3 install --upgrade pip &&\
     pip3 install cloudscraper && \ 
     cp /app/installer-common/rutorrent-*.nginx /root/ && \
     cd /app && \
@@ -24,6 +25,7 @@ RUN \
     cp /app/installer-common/startup-rtorrent.sh /app/installer-common/startup-nginx.sh /app/installer-common/startup-php.sh /app/installer-common/startup-irssi.sh /app/installer-common/rtorrent.rc /root/ && \
     mv /root/rtorrent.rc /root/.rtorrent.rc && \
     cp /app/installer-common/supervisord.conf /etc/supervisor/conf.d/ && \
+    chmod +x /root/*.sh && \
     echo "*** cleaning up mess, should be all done! ***" && \
     rm -rf /rutorrent/.git* && \
     rm -rf /app/installer-common && \
@@ -31,6 +33,6 @@ RUN \
     sed -i 's/\/var\/log/\/downloads\/\.log/g' /etc/nginx/nginx.conf
 
 EXPOSE 80 443 49160 49161 5000
-VOLUME /downloads /config
+VOLUME /downloads
 
-CMD ["supervisord"]
+CMD ["supervisord -c /etc/supervisor/conf.d/supervisord.conf"]
