@@ -23,7 +23,8 @@ RUN \
     git clone https://github.com/Novik/ruTorrent.git rutorrent && \
     cd / && \
     cp ./app/installer-common/config.php /app/rutorrent/conf/ && \
-    cp ./app/installer-common/startup-rtorrent.sh ./app/installer-common/startup-nginx.sh ./app/installer-common/startup-php.sh ./app/installer-common/startup-irssi.sh ./app/installer-common/.rtorrent.rc /root/ && \
+    cp ./app/installer-common/startup-rtorrent.sh ./app/installer-common/startup-nginx.sh ./app/installer-common/startup-php.sh ./app/installer-common/startup-irssi.sh ./app/installer-common/rtorrent.rc /root/ && \
+    mv /root/rtorrent.rc /root/.rtorrent.rc && \
     cp ./app/installer-common/supervisord.conf /etc/supervisor/conf.d/ && \
     echo "*** cleaning up mess, should be all done! ***" && \
     rm -rf ./rutorrent/.git* && \
