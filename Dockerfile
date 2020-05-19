@@ -45,7 +45,7 @@ RUN \
     chmod +x /app/startup/*.sh && \
     rm -rf /app/installer-common && \
     rm -rf /var/lib/apt/lists/* && \
-    sed -i 's/\/var\/log/\/app\/\configs\/\logs/g' /etc/nginx/nginx.conf
+    sed -i 's/\/var\/log/\/app\/configs\/logs/g' /etc/nginx/nginx.conf
 
 # PORTs web = 31337 / ssl = 31340 / rtorrent = 31339 / scgi = 31338
 
