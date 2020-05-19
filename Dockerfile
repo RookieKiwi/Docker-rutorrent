@@ -15,7 +15,7 @@ RUN \
     cp ./app/installer-common/extra.list /etc/apt/sources.list.d/extra.list && \
     apt-get update && \
     echo "*** installing runtime applications ***" && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y rtorrent unzip unrar mediainfo curl php-fpm php-cli php-geoip php-mbstring php-zip nginx wget ffmpeg supervisor php-xml libarchive-zip-perl libjson-perl libxml-libxml-perl irssi sox python-pip && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y rtorrent unzip unrar mediainfo curl php-fpm php-cli php-geoip php-mbstring php-zip nginx wget ffmpeg supervisor php-xml libarchive-zip-perl libjson-perl libxml-libxml-perl irssi sox python-pip python-pip-whl build-essential && \
     pip install cloudscraper && \ 
     cp ./app/installer-common/rutorrent-*.nginx /root/ && \
     cd /app && \
