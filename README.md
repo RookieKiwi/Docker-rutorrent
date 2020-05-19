@@ -2,18 +2,21 @@
 
 ruTorrent with Autodl-irssi and SSL
 
-Ill document one of these days! Quick notes:
+I will document one of these days!
 
-Ports:
-31337 = rutorrent non-ssl port
-31340 = rutorrent ssl port
-31338 = scgi port
-31339 = rtorrent port
+## Ports to map
+31337 = rutorrent non-ssl port / 31338 = scgi port / 31339 = rtorrent port / 31340 = rutorrent ssl port / 31341 = DHT port (disabled by default)
 
-Folders to map
+## Folders to map
 
-/app/downloads = Downloads folder, "watch" folder will be created in this folder to drop any .torrent files you need in there.
+/app/downloads = Downloads folder
+/app/configs = Configuration files folder
 
-/app/configs = Configuration files folder, will also create "logs" folder here for troubleshooting, Also if you want SSL here is where you put your nginx.crt / nginx.key files for SSL.
+## Side notes
+/app/downloads/watch = Watchlist directory, any .torrent files put here will automatically be pulled into rtorrent
+/app/configs/logs = Logging directory for any troubleshooting required
+/app/configs/rtorrent/rtorrent.rc = Main rTorrent configuration file, linked directly to rTorrent client
+/app/configs/rutorrent/torrents = Where downloaded torrent files sit
+/app/configs/config.php = ruTorrent configuration file
 
 Enjoy!

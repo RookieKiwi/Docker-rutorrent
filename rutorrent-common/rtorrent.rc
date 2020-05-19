@@ -13,15 +13,15 @@ log.add_output = "error", "rtorrent.log"
 execute2 = {sh,-c,/usr/bin/php /app/rutorrent/php/initplugins.php &}
 
 # Maximum and minimum number of peers to connect to per torrent.
-throttle.min_peers.normal.set = 40
-throttle.max_peers.normal.set = 50
+throttle.min_peers.normal.set = 1
+throttle.max_peers.normal.set = 400
 
 # Same as above but for seeding completed torrents (-1 = same as downloading)
-throttle.min_peers.seed.set = 10
-throttle.max_peers.seed.set = 50
+throttle.min_peers.seed.set = -1
+throttle.max_peers.seed.set = -1
 
 # Maximum number of simultanious uploads per torrent.
-throttle.max_uploads.set = 8
+throttle.max_uploads.set = 50
 
 # Global upload and download rate in KiB. "0" for unlimited.
 #
@@ -56,15 +56,15 @@ schedule2 = watch_directory,5,5,load_start=/app/downloads/watch/*.torrent
 #network.bind_address.set = rakshasa.no
 
 # Port range to use for listening.
-network.port_range.set = 31342-31345
+network.port_range.set = 31339-31339
 
 # Start opening ports at a random position within the port range.
-network.port_random.set = yes
+network.port_random.set = no
 
 # Check hash for finished torrents. Might be usefull until the bug is
 # fixed that causes lack of diskspace not to be properly reported.
 #
-#pieces.hash.on_completion.set = no
+pieces.hash.on_completion.set = no
 
 # Set whether the client should try to connect to UDP trackers.
 trackers.use_udp.set = yes
@@ -88,7 +88,7 @@ trackers.use_udp.set = yes
 # "auto" (start and stop DHT as needed), or "on" (start DHT immediately).
 # The default is "off". For DHT to work, a session directory must be defined.
 # 
-dht.mode.set = auto
+dht.mode.set = off
 
 # UDP port to use for DHT. 
 # 
@@ -96,7 +96,7 @@ dht.port.set=31341
 
 # Enable peer exchange (for torrents not marked private)
 #
-protocol.pex.set = yes
+protocol.pex.set = no
 
 # Set downlad list layout style. ("full", "compact")
 #

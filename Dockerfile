@@ -9,11 +9,6 @@ LABEL maintainer="RookieKiwi"
 # copy common files for install
 COPY rutorrent-common/ /app/installer-common/
 
-# TODO: 
-# documentation and readme crap
-# symlink some of the configs outside of the container? nginx.conf / config.php / autodl
-
-
 RUN \
     echo "*** Layer 1 - Running container updates and basic installs ***" && \
     DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y git wget unzip unrar
@@ -39,17 +34,16 @@ RUN \
 RUN \
     echo "*** Layer 5 - Software installed, configuring applications and setting up directories ***" && \
     cd / && \
-    cp /app/installer-common/config.php /app/rutorrent/conf/ && \
-    cp /app/installer-common/startup-rtorrent.sh /app/installer-common/startup-nginx.sh /app/installer-common/startup-php.sh /app/installer-common/startup-irssi.sh /app/installer-common/rtorrent.rc /app/startup/ && \
+    cp /app/installer-common/config.php /app/installer-common/startup-rtorrent.sh /app/installer-common/startup-nginx.sh /app/installer-common/startup-php.sh /app/installer-common/startup-irssi.sh /app/installer-common/rtorrent.rc /app/startup/ && \
     cp /app/installer-common/supervisord.conf /etc/supervisor/conf.d/ && \
     chmod +x /app/startup/*.sh && \
     rm -rf /app/installer-common && \
     rm -rf /var/lib/apt/lists/* && \
     sed -i 's/\/var\/log/\/app\/configs\/logs/g' /etc/nginx/nginx.conf
 
-# PORTs web = 31337 / ssl = 31340 / rtorrent = 31342-31345 / scgi = 31338 / dht = 31341
+# PORTs web = 31337 / scgi = 31338 / rtorrent = 31339 / ssl = 31340 / dht = 31341
 
-EXPOSE 31337 31340 31341 31339 31338 31342-31345
+EXPOSE 31337 31338 31339 31340 31341
 VOLUME /app/downloads /app/configs
 
 CMD ["supervisord"]
