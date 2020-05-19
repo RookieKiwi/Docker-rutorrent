@@ -5,6 +5,7 @@ set -x
 if [ ! -e /app/configs/config.php ]; then
     cp /app/startup/config.php /app/configs/config.php
 fi
+rm -rf /app/rutorrent/conf/config.php
 ln -s /app/configs/config.php /app/rutorrent/conf/config.php
 
 MEM=${PHP_MEM:=256M}
