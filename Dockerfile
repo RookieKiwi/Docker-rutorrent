@@ -35,4 +35,4 @@ RUN \
 EXPOSE 80 443 49160 49161 5000
 VOLUME /downloads
 
-CMD ["supervisord -c /etc/supervisor/conf.d/supervisord.conf"]
+CMD ["supervisord"]
