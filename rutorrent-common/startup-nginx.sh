@@ -3,11 +3,11 @@
 set -x
 
 chown -R www-data:www-data /app/rutorrent
-cp /downloads/.htpasswd /app/rutorrent/
-mkdir -p /downloads/.rutorrent/torrents
-chown -R www-data:www-data /downloads/.rutorrent
-mkdir -p /downloads/.log/nginx
-chown www-data:www-data /downloads/.log/nginx
+cp /app/configs/.htpasswd /app/rutorrent/
+mkdir -p /app/configs/rutorrent/torrents
+chown -R www-data:www-data /app/configs/rutorrent
+mkdir -p /app/configs/logs/nginx
+chown www-data:www-data /app/configs/logs/nginx
 
 rm -f /etc/nginx/sites-enabled/*
 
@@ -20,20 +20,20 @@ rm /app/rutorrent/.htpasswd
 site=rutorrent-basic.nginx
 
 # Check if TLS needed
-if [ -e /downloads/nginx.key ] && [ -e /downloads/nginx.crt ]; then
+if [ -e /app/configs/nginx.key ] && [ -e /app/configs/nginx.crt ]; then
     mkdir -p /etc/nginx/ssl
-    cp /downloads/nginx.crt /etc/nginx/ssl/
-    cp /downloads/nginx.key /etc/nginx/ssl/
+    cp /app/configs/nginx.crt /etc/nginx/ssl/
+    cp /app/configs/nginx.key /etc/nginx/ssl/
     site=rutorrent-tls.nginx
 fi
 
-cp /root/$site /etc/nginx/sites-enabled/
+cp /app/startup/$site /etc/nginx/sites-enabled/
 [ -n "$NOIPV6" ] && sed -i 's/listen \[::\]:/#/g' /etc/nginx/sites-enabled/$site
 [ -n "$WEBROOT" ] && ln -s /app/rutorrent /app/rutorrent/$WEBROOT
 
 # Check if .htpasswd presents
-if [ -e /downloads/.htpasswd ]; then
-    cp /downloads/.htpasswd /app/rutorrent/ && chmod 755 /app/rutorrent/.htpasswd && chown www-data:www-data /app/rutorrent/.htpasswd
+if [ -e /app/configs/.htpasswd ]; then
+    cp /app/configs/.htpasswd /app/rutorrent/ && chmod 755 /app/rutorrent/.htpasswd && chown www-data:www-data /app/rutorrent/.htpasswd
 else
 # disable basic auth
     sed -i 's/auth_basic/#auth_basic/g' /etc/nginx/sites-enabled/$site

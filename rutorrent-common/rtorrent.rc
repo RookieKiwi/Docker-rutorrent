@@ -1,7 +1,7 @@
-scgi_port=127.0.0.1:5000
+scgi_port=127.0.0.1:31338
 encoding_list = UTF-8
 
-log.open_file = "rtorrent.log", "/downloads/.log/rtorrent/rtorrent.log"
+log.open_file = "rtorrent.log", "/app/configs/logs/rtorrent/rtorrent.log"
 log.add_output = "info", "rtorrent.log"
 log.add_output = "critical", "rtorrent.log"
 log.add_output = "error", "rtorrent.log"
@@ -29,16 +29,16 @@ throttle.global_down.max_rate.set_kb = 0
 throttle.global_up.max_rate.set_kb = 0
 
 # Default directory to save the downloaded torrents.
-directory.default.set = /downloads
+directory.default.set = /app/downloads
 
 # Default session directory. Make sure you don't run multiple instance
 # of rtorrent using the same session directory. Perhaps using a
 # relative path?
-session.path.set = /downloads/.rtorrent/session
+session.path.set = /app/configs/rtorrent/session
 
 # Watch a directory for new torrents, and stop those that have been
 # deleted.
-schedule2 = watch_directory,5,5,load_start=/downloads/.rtorrent/watch/*.torrent
+schedule2 = watch_directory,5,5,load_start=/app/downloads/watch/*.torrent
 #schedule2 = untied_directory,5,5,stop_untied=
 
 # Close torrents when diskspace is low.
@@ -56,7 +56,7 @@ schedule2 = watch_directory,5,5,load_start=/downloads/.rtorrent/watch/*.torrent
 #network.bind_address.set = rakshasa.no
 
 # Port range to use for listening.
-network.port_range.set = 49161-49161
+network.port_range.set = 31339-31339
 
 # Start opening ports at a random position within the port range.
 network.port_random.set = yes
